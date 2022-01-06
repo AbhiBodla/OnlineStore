@@ -1,0 +1,2 @@
+class Facial < Service
+end

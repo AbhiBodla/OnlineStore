@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+<div class="flex flex-wrap hover:flex-wrap-reverse md:container md:mx-auto">
+
+  
+
+                  <div class="backdrop-opacity-70" width=10% height=90px >
+                  
+                          <%= render partial: "product_variants/images"  %>
+                <% if signed_in? %>  
+                  <% if Wishlist.where("product_variant_id = #{@product_variant.id} AND user_id = #{current_user.id}").length !=0 %>
+                     <button type="button" class="bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded" onclick="removefromwishlist('<%= @product_variant.id %>','<%= current_user.id %>','<%= remove_product_path %>')">Remove from Wishlist</button>
+                  <% else %>                      
+                     <button type="button" class="bg-green-500 hover:bg-green-700 text-white text-center py-2 px-4 rounded" onclick="addtowishlist('<%= @product_variant.id %>','<%= current_user.id %>','<%= add_product_path %>')">Add to Wishlist</button>
+                  <% end %>   
+                 <% end %> 
+
+                   </div>&nbsp&nbsp
+                  <div>
+                        <p>
+                          <strong class="text-xl text-blue-900 ">Batch no:</strong>
+                          <b class="text-2xl text-blue-900 italic " ><%= @product_variant.batch_no %></b>
+                        </p>
+
+                        <p>
+                          <strong class="text-xl text-blue-900">Weight:</strong>
+                          <b class="text-2xl text-blue-900 italic" ><%= @product_variant.weight %></b>
+                        </p>
+
+                        <p>
+                          <strong class="text-xl text-blue-900">Price:</strong>
+                          <b class="text-2xl text-blue-900 italic " ><%= @product_variant.price %></b>
+                        </p>
+
+                        <p>
+                          <strong class="text-xl text-blue-900">Quantity:</strong>
+                          <b class="text-2xl text-blue-900 italic" ><%= @product_variant.quantity %></b>
+                        </p>
+
+                        <p>
+                          <strong class="text-xl text-blue-900">Expiry:</strong>
+                          <b class="text-2xl text-blue-900 italic" ><%= @product_variant.expiry %></b>
+                        </p>
+
+                        <p>
+                          <strong class="text-xl text-blue-900">Product:</strong>
+                          <b class="text-2xl text-blue-900 italic" ><%= @product_variant.product_id %></b>
+                        </p>
+
+                          <p>
+                            <%= render partial: "orders/form", locals: {ordered: @product_variant}  %>
+                          </p>
+                  </div>
+</div>
+       <%= javascript_pack_tag "addtowishlist" %>
+

@@ -1,0 +1,8 @@
+<h1>Editing Order</h1>
+
+<%= render partial: "orders/form", locals: {ordered: @service}  %>
+<%= render partial: "orders/productform", locals: {ordered: @product}  %>
+
+
+<%= link_to 'Show', @order %> |
+<%= link_to 'Back', orders_path %>

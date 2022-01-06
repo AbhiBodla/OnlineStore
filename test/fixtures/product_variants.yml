@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  batch_no: MyString
+  weight: 1
+  price: 1.5
+  quantity: 1
+  expiry: 2021-12-02
+  products: one
+
+two:
+  batch_no: MyString
+  weight: 1
+  price: 1.5
+  quantity: 1
+  expiry: 2021-12-02
+  products: two

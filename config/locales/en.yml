@@ -1,0 +1,88 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+en:
+ 
+  # for products
+      product_created: "Product was successfully created."
+      product_updated: "Product was successfully updated."
+      product_destroyed: "Product was successfully destroyed."
+
+  # for product_variants
+      product_variant_created: "Product Variant was successfully created."
+      product_variant_updated: "Product Variant was successfully updated."
+      product_variant_destroyed: "Product Variant was successfully destroyed."
+
+   # for services
+      service_created: "Service was successfully created."
+      service_updated: "Service was successfully updated."
+      service_destroyed: "Service was successfully destroyed." 
+
+   # for orders 
+      order_created: "Order was successfully created."
+      order_updated: "Order was successfully updated."
+      order_destroyed: "Order was successfully destroyed." 
+
+   # for categories
+      category_created: "Category was successfully created."
+      category_updated: "Category was successfully updated."
+      category_destroyed: "Category was successfully destroyed."
+
+   # for notifications
+      notification_created: "Notification was successfully created."
+      notification_updated: "Notification was successfully updated."
+      notification_destroyed: "Notification was sucessfully destroyed."  
+
+   # for specific_notifications
+      specific_notification_created: "Specific Notification was successfully created."
+      specific_notification_updated: "Specific Notification was successfully updated."
+      specific_notification_destroyed: "Specific Notification was successfully destroyed."
+
+   # for wishlists
+      wishlist_created: "Wishlist was successfully created."
+      wishlist_updated: "Wishlist was successfully updated."
+      wishlist_destroyed: "Wishlist was successfully destroyed."   
+
+   # for orders_helper
+      added_in_cart: "Added in Cart"
+      already_in_cart: "Service is already in cart"  
+
+   # for orders_model (order.rb)
+      order_title: "Order Placed"
+
+   # for products_model (product.rb)
+      product_title: "Product Added"
+      product_content: "There is a new Product"  
+
+   # for services_model (service.rb)
+      service_title: "Service Added"
+      service_content: "There is a new Service"   
+       

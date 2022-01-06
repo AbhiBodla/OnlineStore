@@ -1,0 +1,2 @@
+class Massage < Service
+end

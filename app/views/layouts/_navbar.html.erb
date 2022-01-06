@@ -1,0 +1,170 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<br>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Tailwind Starter Template - Responsive Header : Tailwind Toolbox</title>
+	<meta name="author" content="name">
+  <meta name="description" content="description here">
+	<meta name="keywords" content="keywords,here">
+        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"> <!--Totally optional :) -->
+
+
+<body class="bg-gray-400 font-sans leading-normal tracking-normal"  >
+
+	<nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0">
+		<div class="flex items-center flex-shrink-0 text-white mr-6">
+			<a class="text-white no-underline hover:text-white hover:no-underline">
+				<span class="text-2xl pl-2"><i class="em em-grinning"></i> Online Store</span>
+			</a>
+		</div>
+		
+
+		<div class="block lg:hidden">
+			<button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white">
+				<svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+			</button>
+		</div>
+
+		<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
+			<ul class="list-reset lg:flex justify-end flex-1 items-center">
+				<li class="mr-3">
+					<a class="inline-block py-2 px-4 text-white no-underline" ><%= link_to "Home", root_path %></a>
+				</li>
+
+        <% if signed_in? %>
+
+				<li class="mr-3">
+					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" ><%= link_to "Sign Out",  destroy_user_session_path, method: :delete %></a>
+				</li>
+				
+
+
+
+				<li class="mr-3">
+					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" > <%= link_to "Product Brand", products_path %></a>
+				</li>
+				<li class="mr-3">
+					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" > <%= link_to "Services", services_path %></a>
+				</li>
+                <li class="mr-3">
+					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" > <%= link_to "Orders", orders_path %></a>
+				</li>
+                <li class="mr-3">
+					<button class="font-sans block mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle text-black hover:text-gray-700" >  <%= link_to "Cart", carts_index_path %>  </button>
+				</li>
+				<li class="mr-3">
+                    
+					<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+
+							<div class="justify-center">
+								<div x-data="{ dropdownOpen: false }" class="relative">
+									<button @click="dropdownOpen = !dropdownOpen" class="fa fa-shopping-bag">
+										<svg class="h-5 w-5 text-gray-800"  viewBox="0 10 20 20" fill="currentColor">
+											<path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+										</svg>
+									</button>
+
+									<div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-10 w-10 z-10"></div>
+
+									<div x-show="dropdownOpen" class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20" style="width:20rem;">
+										<div class="py-2">
+										
+											<div class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+												
+												<p class="text-gray-600 text-sm mx-2">
+												 
+												
+												   
+													<span class="font-bold text-center">
+													 <%= render partial: "layouts/wishlist"%></span>
+													 
+											
+												</p>
+												
+											</div>
+										
+										</div>
+										<button class="block bg-gray-800 text-white w-full text-center font-bold py-2"><%= link_to "See all Wishlists item", wishlists_path %></button>
+									</div>
+								</div>
+							</div>
+				</li>
+				<li class="mr-3">
+							<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+
+							<div class="justify-center">
+								<div x-data="{ dropdownOpen: false }" class="relative">
+									<button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+										<svg class="h-5 w-5 text-gray-800"  viewBox="0 0 20 20" fill="currentColor">
+											<path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+										</svg>
+									</button>
+
+									<div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-10 w-10 z-10"></div>
+
+									<div x-show="dropdownOpen" class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20" style="width:20rem;">
+										<div class="py-2">
+										
+											<div class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+												
+												<p class="text-gray-600 text-sm mx-2">
+												 
+												
+												   
+													<span class="font-bold text-center">
+													 <%= render partial: "layouts/notifications"%></span>
+											
+												</p>
+												
+											</div>
+										
+										</div>
+										<button class="block bg-gray-800 text-white w-full text-center font-bold py-2"><%= link_to "See all notifications", specific_notifications_path %></button>
+									</div>
+								</div>
+							</div>
+				</li>
+
+
+         <%= current_user.email %>
+         <% else %>
+           <li class="mr-3">
+					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" > <%= link_to "products", products_path %>  </a>
+		   </li>
+		   <li class="mr-3">
+					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" > <%= link_to "Services", services_path %>  </a>
+		   </li>
+           <li class="mr-3">
+					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" > <%= link_to "Login", new_user_session_path %>  </a>
+		   </li>
+         <li class="mr-3">
+					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" > <%= link_to "Sign Up", new_user_registration_path %>  </a>
+		 </li>
+		 <li>
+		  
+		 </li>
+        <% end %>
+			</ul>
+		</div>
+	</nav>
+
+	<!--Container-->
+	<div class="container shadow-lg mx-auto bg-white mt-24 md:mt-18">
+
+	</div>
+
+	<script>
+		//Javascript to toggle the menu
+		document.getElementById('nav-toggle').onclick = function(){
+			document.getElementById("nav-content").classList.toggle("hidden");
+		}
+	</script>
+
+</body>
+

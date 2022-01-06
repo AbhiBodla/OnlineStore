@@ -1,0 +1,6 @@
+<% @wishlists = Wishlist.where("user_id = #{current_user.id}").order('created_at DESC').limit(4) %>
+<% @wishlists.each do |wishlist| %>
+
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= wishlist.product_variant.product.name %></td><br>
+
+<% end %>

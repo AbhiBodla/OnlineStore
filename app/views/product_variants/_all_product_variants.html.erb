@@ -1,0 +1,74 @@
+
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="bg-white border-b">
+            <tr>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Batch No
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Name
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Weight
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Price
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Quantity
+              </th>
+               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Expiry
+              </th>
+               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Product Id
+              </th>               
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left"  >
+                Actions
+              </th>             
+            </tr>
+          </thead>
+          <tbody>
+                <% @product_variants.each do |product_variant| %>
+                    <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= product_variant.batch_no %></td>
+                          <% if defined? product_variant.product.name %>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= product_variant.product.name %>
+                                  <% if product_variant.discarded? %>
+                                      <h1 class="text-xl text-red-900 italic">DELETED</h1>
+                                  <% end %>
+                              </td>
+                          <% end %>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= product_variant.weight %></td>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= product_variant.price %></td>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= product_variant.quantity %></td>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= product_variant.expiry %></td>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= product_variant.product_id %></td>
+                        
+                               <td><button><%= link_to 'Show', product_variant, class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %></button>
+                          &nbsp
+                                <button><%= link_to 'Edit', edit_product_variant_path(product_variant, pid: @product.id), class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" if signed_in? && policy(product_variant).update?  %> </button>&nbsp<br><br>
+                                
+                                <button><%= link_to 'Permanent Destroy', product_variant, class:"bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded", method: :delete, data: { confirm: 'Are you sure?' } if signed_in? && (current_user.role == "admin") %></button><br><br>
+                              
+                                <button><%= link_to 'Destroy', product_variants_soft_destroy_path(id: product_variant.id), class:"bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded", method: :post, data: { confirm: 'Are you sure?' } if signed_in? && policy(product_variant).soft_destroy? && !product_variant.discarded? %></button>
+                              
+                              </td>                  
+                    </tr>            
+                <% end %>
+          </tbody>
+        </table>
+        <button ><%= link_to 'New Product Variant', new_product_variant_path(pid: @product.id), class:"bg-green-500 hover:bg-green-700 text-white text-center py-2 px-4 rounded" if signed_in? && policy(@product_variants).create? %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

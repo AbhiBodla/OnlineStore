@@ -1,0 +1,98 @@
+<%= form_for @product do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div> 
+  <% end %>
+
+
+      <div class="flex flex pt-4 w-50 ">
+       <label for="name" class="text-lg">Category:</label>
+       <%= form.select(:category_id, Category.where("category_of = 0").pluck(:name, :id), :prompt => "select Category") %>
+    </div>
+
+     
+
+     <div class="flex flex pt-4 w-50 ">
+       <label for="name" class="text-lg">Name:</label>
+       <%= form.text_field :name %>
+    </div>
+
+
+  
+<div class="flex flex pt-4 w-50 ">
+  <label for="logo" class="text-lg">Logo</label>
+  <%= form.file_field :main_image %>
+</div>
+
+
+
+  
+
+  <div class="flex flex pt-4 w-50 ">
+ <label for="desc" class="text-lg">Desc</label>
+    <%= form.text_area :desc %>
+  </div>
+
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+ <b>Product Variants</b>
+
+  
+  <div class="field ">
+    <%= form.fields_for :product_variants do |builder| %>
+    <div class="flex flex pt-4 w-50 ">
+      <label for="batch no" class="text-lg">Batch No.</label>
+    <%= builder.text_field :batch_no %>
+     </div>
+    <div class="flex flex pt-4 w-50 ">
+
+   <label for="weight" class="text-lg">Weight</label>
+    <%= builder.text_field :weight %>
+     </div>
+    <div class="flex flex pt-4 w-50 ">
+     <label for="Price" class="text-lg">Price</label>
+    <%= builder.number_field :price %>
+     </div>
+    <div class="flex flex pt-4 w-50 ">
+   <label for="Quantity" class="text-lg">Quantity</label>
+    <%= builder.number_field :quantity %>
+     </div>
+       
+
+    <div class="flex flex pt-4 w-50 ">
+      <label for="images" class="text-lg">Images</label>
+      <%= builder.file_field :other_images, multiple: true %>
+    </div>
+
+   <div class="flex flex pt-4 w-50 ">
+     <label for="exp date" class="text-lg">Exp. Date</label>
+    <%= builder.date_field :expiry %>
+     </div>
+    <div class="flex flex pt-4 w-50 ">
+    <%= builder.hidden_field :user_id, value: current_user.id %>
+     </div>
+    <% end %>
+  </div>
+
+ 
+
+  
+  
+  
+
+  <div class="actions">
+         
+         <button href="#" class="bg-green-500 hover:bg-green-700 text-white text-center py-2 px-4 rounded"><%= form.submit %></button>
+        <button class="px-6 h-12 uppercase font-semibold tracking-wider border border-gray-200 text-gray-900" type="button">
+          <%= link_to 'Back', products_path %>
+        </button>
+  </div>
+<% end %>

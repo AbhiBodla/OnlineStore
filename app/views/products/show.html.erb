@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.1.2/tailwind.min.css">
+
+
+<div class="flex p-6 font-mono">
+  <div class="flex-none w-48 mb-10 scale-x-75 relative z-10 before:absolute before:top-1 before:left-1 before:w-full before:h-full before:bg-teal-400">
+   
+          <p>Image</p>
+          <% if @product.main_image.attached? %>
+
+                <% if @product.main_image.attached? %>
+                <%= image_tag @product.main_image %>
+                <% end %>
+
+          <% else %>
+
+                    <%= image_tag ('no_image.png') %>
+          
+          <% end %>
+
+           
+           
+      
+  </div>
+<%= render 'product_variants/all_product_variants' %>
+</div>
+

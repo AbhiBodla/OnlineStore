@@ -1,0 +1,62 @@
+<%= form_with(model: product_variant) do |form| %>
+  <% if product_variant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product_variant.errors.count, "error") %> prohibited this product_variant from being saved:</h2>
+
+      <ul>
+        <% product_variant.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="text-center">
+  <div class="field">
+    <%= form.label :batch_no, class:"block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" %>
+    <%= form.text_field :batch_no, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :weight, class:"block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" %>
+    <%= form.text_field :weight, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price, class:"block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" %>
+    <%= form.text_field :price, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>    
+  </div>
+    
+    <div class="field">
+      <%= form.label :main_image, class:"block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" %>
+      <%= form.file_field :main_image, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+    </div>
+
+    <div class="field"> 
+      <%= form.label :other_images, class:"block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" %>
+      <%= form.file_field :other_images, multiple: true, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+    </div>
+
+ <%= form.hidden_field :user_id, value: current_user.id %>
+  <div class="field">
+    <%= form.label :quantity, class:"block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" %>
+    <%= form.number_field :quantity, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expiry, class:"block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" %>
+    <%= form.date_select :expiry, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+  </div>
+
+ 
+   
+   <div class="field">
+    <%= form.label :product_id, class:"block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" %>
+    <%= form.select(:product_id, Product.pluck(:name, :id), :selected => params[:pid], class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500") %>
+  </div>
+     
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  </div>
+<% end %>

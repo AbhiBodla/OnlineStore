@@ -1,0 +1,72 @@
+  <b>Search Here!! </b>
+   <%= form_tag  @service, method: :get do  %> 
+							<%= text_field_tag :search_query, @query, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+							<%  submit_tag "Search", name: nil %>
+						<% end %>
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="bg-white border-b">
+            <tr>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Name
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Desc
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Date
+              </th>
+               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Start Time
+              </th>
+               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                End Time
+              </th>
+               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Price
+              </th>
+               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Duration
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left"  >
+                Actions
+              </th>
+             
+            </tr>
+          </thead>
+          <tbody>
+          <% @services.each do |service| %>
+            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= service.name %>
+                    <% if service.discarded? %>
+                      <h1 class="text-xl text-red-900 italic">DELETED</h1>
+                    <% end %>              
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= service.desc %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= service.date %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= service.start_time %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= service.end_time %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= service.price %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= service.duration %></td>
+              <td><button ><%= link_to 'Show', service, class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %> </button> 
+ 
+               <button><%= link_to 'Edit', edit_service_path(service), class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" if signed_in? && policy(service).update? %> </button>
+               <button><%= link_to 'Permanent Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }, class:"bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded" if (signed_in? && current_user.role == "admin") %></button>
+               <button><%= link_to 'Destroy', services_soft_destroy_path,  method: :post, class:"bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded", data: { confirm: 'Are you sure?' } if signed_in? && policy(service).destroy? %></button>
+              </td>
+            </tr>
+            
+            <% end %>
+          </tbody>
+        </table>
+        <button ><%= link_to 'New Service', new_service_path, class:"bg-green-500 hover:bg-green-700 text-white text-center py-2 px-4 rounded" if signed_in? && policy(@services).create? %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

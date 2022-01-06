@@ -1,0 +1,22 @@
+
+
+
+<table class="min-w-full"> 
+<tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Name:</strong><%= @service.name %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Desc:</strong><%= @service.desc %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Price:</strong><%= @service.price %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Start Time:</strong><%= @service.start_time %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>End Time:</strong><%= @service.end_time %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Duration:</strong><%= @service.duration %></td>
+</tr>
+<tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+   <td colspan="6" ><%= render partial: "orders/form", locals: {ordered: @service}  %></td>
+</tr>
+<tr>
+
+<%= link_to 'Edit', edit_service_path(@service) %>
+<%= link_to 'Back', services_path %>
+
+</tr>
+</table>

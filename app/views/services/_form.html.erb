@@ -1,0 +1,66 @@
+<%= form_with(model: service) do |form| %>
+  <% if service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+        <% service.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :type %>
+
+  
+
+
+   <div class="flex flex pt-4 w-50 ">
+       <label for="name" class="text-lg">Category:</label>
+       <%= form.select(:category_id, Category.where("category_of = 1").pluck(:name, :id), :prompt => "select Category") %>
+    </div>
+
+  <div class="flex flex pt-4 w-50 ">
+    <label for="name" class="text-lg">Name:</label>
+    <%= form.text_field :name %>
+  </div>
+
+<div class="flex flex pt-4 w-50 ">
+    <label for="desc" class="text-lg">Desc:</label>
+    <%= form.text_area :desc %>
+  </div>
+
+
+
+  <div class="flex flex pt-4 w-50 ">
+    <label for="time" class="text-lg">Start Time:</label>
+    <%= form.time_field :start_time %>
+  </div>
+ 
+
+  <div class="flex flex pt-4 w-50 ">
+   <label for="time" class="text-lg">End Time:</label>
+    <%= form.time_field :end_time %>
+  </div>
+
+
+  <div class="flex flex pt-4 w-50 ">
+    <label for="duration" class="text-lg">Duration:</label>
+    <%= form.number_field :duration %>
+  </div>
+ 
+
+  
+
+  
+
+  <div class="flex flex pt-4 w-50 ">
+    <label for="price" class="text-lg">Price:</label>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="actions">
+    <button href="#" class="bg-green-500 hover:bg-green-700 text-white text-center py-2 px-4 rounded"><%= form.submit %></button>
+  </div>
+<% end %>

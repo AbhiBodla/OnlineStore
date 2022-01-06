@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-4xl italic">Specific Notifications</h1>
+
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="bg-white border-b">
+            <tr>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+             User
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Content
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left"  >
+                Notification
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left"  >
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @specific_notifications = SpecificNotification.where("user_id = #{current_user.id}")%>
+             <% @specific_notifications.each do |specific_notification| %>
+            <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= specific_notification.user_id %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 text-2xl whitespace-nowrap"><b><%= specific_notification.notification.content %></b></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= specific_notification.notification_id %></td>
+              <td><%= link_to 'Destroy', specific_notification, method: :delete, data: { confirm: 'Are you sure?' }, class:"bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded" %></td>             
+            </tr>            
+            <% end %>
+          </tbody>
+        </table>       
+      </div>
+    </div>
+  </div>
+</div>
+
+
