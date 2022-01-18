@@ -1,4 +1,12 @@
 <p id="notice"><%= notice %></p>
+<h1>Order Details</h1>
+  Bill Generated on:
+  <%= Time.zone.now %>
+ 
+<p>
+  <strong>Order Id:</strong>
+  <%= @order.id %>
+</p>
 
 <p>
   <strong>Ordered:</strong>
@@ -38,6 +46,3 @@
   <%= @order.qty %>
 </p>
 <% end %>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>

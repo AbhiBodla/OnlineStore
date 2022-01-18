@@ -26,12 +26,13 @@ class Order < ApplicationRecord
  
     if Order.where(cart == "false" && ordered_type == "ProductVariant") 
       product = ProductVariant.find(ordered_id) 
+     if  qty != nil 
       if (qty > product.quantity)
-         content = "you are exceeding stock limit" 
-      else
-             
+         content = "you are exceeding stock limit"          
+      else             
         product.update(quantity: (product.quantity - qty))
       end
+    end 
     end
 
 end

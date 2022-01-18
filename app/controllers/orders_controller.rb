@@ -11,6 +11,12 @@ class OrdersController < ApplicationController
 
   # GET /orders/1 or /orders/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Order id: #{@order.id}", template: "orders/orders.html.erb"   # Excluding ".pdf" extension.
+      end
+    end
   end
 
   # GET /orders/new
