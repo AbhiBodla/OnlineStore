@@ -13,7 +13,7 @@
                Order id
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Product/Services Name
+                Product/Product Services Name
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Desc
@@ -46,27 +46,30 @@
             <% @cart.each do |cart| %>
           <% if cart.cart == true  %>
             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= cart.ordered_id %></td>
-               <% if defined? cart.ordered.product.name %>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.ordered.product.name %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= cart.orderable_id %></td>
+               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+               <% if defined? cart.orderable.product.name %>
+              <%= cart.orderable.product.name %></td>
               <% else %>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.ordered.name %></td>
+              <%= cart.orderable.name %></td>
               <% end %>
-              <% if defined? cart.ordered.product.desc %>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.ordered.product.desc %></td>
+              
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <% if defined? cart.orderable.product.desc %>
+               <%= cart.orderable.product.desc %></td>
               <% else %>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.ordered.desc %></td>
+              <%= cart.orderable.desc %></td>
               <% end %>
                <%= form_for Order.new do |f| %>
                     
                      <% if defined? cart.qty != nil %>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"> <%= f.number_field :qty, value: cart.qty, id: "qty", onchange:"changeqty(this.value,#{cart.id},#{cart.ordered.price },#{cart.total_amount})" %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"> <%= f.number_field :qty, value: cart.qty, id: "qty", onchange:"changeqty(this.value,#{cart.id},#{cart.orderable.price },#{cart.total_amount})" %></td>
                <% end %>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.date %></td>
-                <% if defined?  cart.ordered.start_time != nil %>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.ordered.start_time %></td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.ordered.end_time %></td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.ordered.duration %></td>
+                <% if defined?  cart.orderable.start_time != nil %>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.orderable.start_time %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.orderable.end_time %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= cart.orderable.duration %></td>
               <% end %>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= f.number_field :total_amount, id: "total_amount#{cart.id}", value: cart.total_amount, :readonly => true %></td></td>
               
@@ -89,12 +92,11 @@
                                 });
                             }
                     
-                            function changetime (time,order_id,price,orderedtime)
+                            function changetime (time,order_id,price,orderabletime)
                             {
                                 var newPrice= time*(price);
                                 document.getElementById("total_amount"+order_id).value = newPrice;  
                                 $.ajax({
-
                                     url: "/carts/update_time",
                                     type: "post",
                                     data: "time="+time+"&order_id="+order_id+"&new="+newPrice
@@ -106,7 +108,7 @@
                 </script>
                <% end %>
              <% end %>
-            <% end %>
+          <% end %>
           </tbody>
         </table>
         <button><%= link_to "Pay Now", carts_pay_now_path, class:"bg-green-500 hover:bg-green-700 text-white text-center py-2 px-4 rounded" %></button>

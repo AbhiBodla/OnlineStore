@@ -4,10 +4,10 @@ class SearchesController < ApplicationController
   # GET /searches or /searches.json
   def index
     Product.reindex
-    Service.reindex
+    ProductService.reindex
     query = params[:search_query]
     if query != nil         
-      results = Searchkick.pagy_search(query, models: [Service, Product], fields: ['name^5','desc'],  misspellings: {below: 3, edit_distance: 1}) 
+      results = Searchkick.pagy_search(query, models: [ProductService, Product], fields: ['name^5','desc'],  misspellings: {below: 3, edit_distance: 1}) 
       @pagy, @searches = pagy_searchkick(results, items: 10)       
     end
   end

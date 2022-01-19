@@ -1,7 +1,7 @@
 <h1>Editing Order</h1>
 
-<%= render partial: "orders/form", locals: {ordered: @service}  %>
-<%= render partial: "orders/productform", locals: {ordered: @product}  %>
+<%= render partial: "orders/form", locals: {orderable: @product_service}  %>
+<%= render partial: "orders/productform", locals: {orderable: @product}  %>
 
 
 <%= link_to 'Show', @order %> |

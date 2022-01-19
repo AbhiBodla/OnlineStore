@@ -1,7 +1,7 @@
-<%= form_for [ordered, Order.new] do |form|   %>
+<%= form_for [orderable, Order.new] do |form|   %>
 
                     
-               <% if defined? ordered.quantity != nil %>     
+               <% if defined? orderable.quantity != nil %>     
                         <div class="flex flex pt-4 w-50 ">
                               <label for="quantity" class="text-2xl" >Quantity:</label>
                               <%= form.number_field :qty, id: "qty", onchange:"changing(this.value)", class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
@@ -15,7 +15,7 @@
 
                         <div class="field">
                               <%= form.label :Date %><br>
-                              <%= form.date_field :date, id: "date", class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded w-half py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", onchange: "changetime(this.value,('#{ordered.start_time}'),('#{ordered.end_time}'),('#{ordered.duration}'))"   %>
+                              <%= form.date_field :date, id: "date", class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded w-half py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500", onchange: "changetime(this.value,('#{orderable.start_time}'),('#{orderable.end_time}'),('#{orderable.duration}'))"   %>
                         </div>
 
                         <div id="timeslot" >
@@ -32,7 +32,7 @@
 
                         <div class="field">
                               <%= form.label :total_amount %><br>
-                              <%= form.number_field :total_amount, value: ordered.price, id: "total_amount", :readonly => true, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded w-half py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+                              <%= form.number_field :total_amount, value: orderable.price, id: "total_amount", :readonly => true, class:"bg-gray-200 appearance-none border-2 border-gray-200 rounded w-half py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
                         </div>  
               <% end %>
     
@@ -65,7 +65,7 @@
                 
                           function changing(q) 
                                 {
-                                var amt = q*<%= ordered.price %>;
+                                var amt = q*<%= orderable.price %>;
                                 document.getElementById("total_amount").value=amt;  
                                 }
                   </script>
@@ -75,20 +75,20 @@
             <% if signed_in? %>
                   <%= form.submit "Add to Cart", :name => "addtocart", class:"h-10 px-6 font-semibold rounded-full bg-green-600 text-white"  %>
             <% elsif @product_variant.present? %>
-                  <%= link_to "Add to Cart", new_user_session_path(id: ordered, type: "ProductVariant"), class:"h-10 px-5 py-2 font-semibold rounded-full bg-green-600 text-white"  %> 
-            <% elsif @service.present? %>
-                  <%= link_to "Add to Cart", new_user_session_path(id: ordered, type: "Service"), class:"h-10 px-5 py-2 font-semibold rounded-full bg-green-600 text-white"  %>
+                  <%= link_to "Add to Cart", new_user_session_path(id: orderable, type: "ProductVariant"), class:"h-10 px-5 py-2 font-semibold rounded-full bg-green-600 text-white"  %> 
+            <% elsif @product_service.present? %>
+                  <%= link_to "Add to Cart", new_user_session_path(id: orderable, type: "ProductService"), class:"h-10 px-5 py-2 font-semibold rounded-full bg-green-600 text-white"  %>
             <% end %>    
             <% if signed_in? %>  
                         <% if defined? @product_variant.product.name %>    
-                        <button class="h-10 px-6 font-semibold rounded-full bg-blue-600 text-white"  type="button" onclick="buynow('<%= @product_variant.product.name %>','<%= ordered.price %>','<%= ordered.id%>','<%= @product_variant.id %>')" >Buy Now</button> 
+                        <button class="h-10 px-6 font-semibold rounded-full bg-blue-600 text-white"  type="button" onclick="buynow('<%= @product_variant.product.name %>','<%= orderable.price %>','<%= orderable.id%>','<%= @product_variant.id %>')" >Buy Now</button> 
                         <% else %>   
-                        <button class="h-10 px-6 font-semibold rounded-full bg-blue-600 text-white"  type="button" onclick="buynow('<%= ordered.name %>','<%= ordered.price %>','<%= ordered.id %>')" >Buy Now</button> 
+                        <button class="h-10 px-6 font-semibold rounded-full bg-blue-600 text-white"  type="button" onclick="buynow('<%= orderable.name %>','<%= orderable.price %>','<%= orderable.id %>')" >Buy Now</button> 
                         <% end %>  
             <% elsif @product_variant.present? %> 
-                        <%= link_to "Buynow", new_user_session_path(id: ordered, type: "ProductVariant"), class:"h-10 px-5 py-2 font-semibold rounded-full bg-blue-600 text-white"  %>
-            <% elsif @service.present? %> 
-                        <%= link_to "Buynow", new_user_session_path(id: ordered, type: "Service"), class:"h-10 px-5 py-2 font-semibold rounded-full bg-blue-600 text-white"  %>
+                        <%= link_to "Buynow", new_user_session_path(id: orderable, type: "ProductVariant"), class:"h-10 px-5 py-2 font-semibold rounded-full bg-blue-600 text-white"  %>
+            <% elsif @product_service.present? %> 
+                        <%= link_to "Buynow", new_user_session_path(id: orderable, type: "ProductService"), class:"h-10 px-5 py-2 font-semibold rounded-full bg-blue-600 text-white"  %>
             <% end %>        
 <% end  %>
                      <%= javascript_pack_tag "payment" %>

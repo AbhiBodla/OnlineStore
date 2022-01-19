@@ -16,17 +16,17 @@
   
   /* Navbar links on mouse-over */
   .navbar a:hover {
-    background-color: #000;
+    background-color: rgb(83, 29, 29);
   }
   
   /* Current/active navbar link */
   .active {
-    background-color: #04AA6D;
+    background-color: #97aca4;
   }
 
    /* home.html */
   .card {
-    box-shadow: 0 4px 8px 0 rgba(83, 74, 74, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(36, 33, 33, 0.2);
     width: 300px;
     height: 400px;
     margin:auto;

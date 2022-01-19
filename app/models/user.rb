@@ -10,8 +10,8 @@ class User < ApplicationRecord
       }
     has_many :products, dependent: :destroy
     has_many :product_variants, dependent: :destroy
-    has_many :orders, as: :ordered, dependent: :destroy
-    has_many :services, dependent: :destroy
+    has_many :orders, as: :orderable, dependent: :destroy
+    has_many :product_services, dependent: :destroy
     validates_uniqueness_of :email
     has_many :wishlists
 

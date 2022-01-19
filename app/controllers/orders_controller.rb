@@ -7,6 +7,12 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     @orders = Order.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Orders: #{@orders.count}", template: "orders/index.html.erb", layout: "pdf"   # Excluding ".pdf" extension.
+      end
+    end
   end
 
   # GET /orders/1 or /orders/1.json
@@ -38,7 +44,7 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    @order = @ordered.orders.new (order_params)
+    @order = @orderable.orders.new (order_params)
      
     @order.user_id = current_user.id
         if params[:addtocart] == "Add to Cart"
@@ -94,7 +100,7 @@ end
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:ordered_id, :ordered_type, :total_amount, :tim, :date, :qty, :user_id, :start_time, :end_time, :duration )
+      params.require(:order).permit(:orderable_id, :orderable_type, :total_amount, :tim, :date, :qty, :user_id, :start_time, :end_time, :duration )
     end
 
    

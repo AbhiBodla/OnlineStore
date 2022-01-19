@@ -30,6 +30,9 @@
                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Cart
               </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+               Email
+              </th>
                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Total Amount
               </th>
@@ -39,8 +42,8 @@
              
             </tr>
           </thead>
-          <tbody>
-          <% @orders = Order.where("user_id = #{current_user.id}")%>
+          <tbody>  
+          <% @orders = Order.all %>       
            <% @orders.each do |order| %>
            <% if order.cart != true %>
             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
@@ -56,19 +59,13 @@
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= order.start_time %></td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= order.end_time %></td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= order.cart %></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= order.user.email %></td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= order.total_amount %></td>
               <td><button ><%= link_to 'Show', order, class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %> </button></td> 
               <td><button>
                   <%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }, class:"bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded" if signed_in? && policy(order).destroy?  %>
               </button></td>
               <td><button ><%= link_to 'Print', order_path(order, format: :pdf), class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %> </button></td> 
-              
-               
-               
-               
-              </td>
-             
-              
             </tr>
             <% end %>
             

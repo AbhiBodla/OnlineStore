@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Ordered:</strong>
-  <%= @order.ordered_id %>
+  <strong>orderable:</strong>
+  <%= @order.orderable_id %>
 </p>
 
 <p>
@@ -25,10 +25,10 @@
 </p>
 <% end %>
 
-<% if defined? @order.ordered.duration %>
+<% if defined? @order.orderable.duration %>
 <p>
   <strong>Duration:</strong>
-  <%= @order.ordered.duration %>
+  <%= @order.orderable.duration %>
 </p>
 <% end %>
 

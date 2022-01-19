@@ -1,6 +1,6 @@
 class Notification < ApplicationRecord
   
-  belongs_to :notification_of, polymorphic: true 
+  belongs_to :notifiable, polymorphic: true 
   has_many :specific_notifications
 
   

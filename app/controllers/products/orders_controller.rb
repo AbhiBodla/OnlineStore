@@ -1,11 +1,11 @@
 class Products::OrdersController < OrdersController
-    before_action :set_ordered
+    before_action :set_orderable
     
     
     private
     
-    def set_ordered
-    @ordered = Product.find(params[:product_id])
+    def set_orderable
+    @orderable = Product.find(params[:product_id])
     
     end
     

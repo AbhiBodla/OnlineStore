@@ -1,0 +1,22 @@
+
+
+
+<table class="min-w-full"> 
+<tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Name:</strong><%= @product_service.name %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Desc:</strong><%= @product_service.desc %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Price:</strong><%= @product_service.price %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Start Time:</strong><%= @product_service.start_time %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>End Time:</strong><%= @product_service.end_time %></td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <strong>Duration:</strong><%= @product_service.duration %></td>
+</tr>
+<tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+   <td colspan="6" ><%= render partial: "orders/form", locals: {orderable: @product_service}  %></td>
+</tr>
+<tr>
+
+<%= link_to 'Edit', edit_product_service_path(@product_service) %>
+<%= link_to 'Back', product_services_path %>
+
+</tr>
+</table>

@@ -21,7 +21,7 @@ class  CheckoutController < ApplicationController
           end
          
           def order_place
-             @order = {"user_id": current_user.id,"ordered_id": $data["id"],"qty": $data["qty"],"ordered_type": $data["ordered_type"],"start_time": $data["start_time"],"end_time": $data["end_time"],"date": $data['date'],"total_amount": $data["total_amount"]}
+             @order = {"user_id": current_user.id,"orderable_id": $data["id"],"qty": $data["qty"],"orderable_type": $data["orderable_type"],"start_time": $data["start_time"],"end_time": $data["end_time"],"date": $data['date'],"total_amount": $data["total_amount"]}
              @order_place = Order.new(@order)
             respond_to do |format|
                 if  @order_place.save

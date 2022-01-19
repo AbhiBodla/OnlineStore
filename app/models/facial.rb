@@ -1,2 +1,2 @@
-class Facial < Service
+class Facial < ProductService
 end

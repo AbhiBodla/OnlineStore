@@ -1,7 +1,7 @@
 class ProductVariant < ApplicationRecord
   include Discard::Model
   belongs_to :product
-  has_many :orders, as: :ordered, dependent: :destroy
+  has_many :orders, as: :orderable, dependent: :destroy
   validates_uniqueness_of :batch_no
   belongs_to :user
   has_one_attached :main_image

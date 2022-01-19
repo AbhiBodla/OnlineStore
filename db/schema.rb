@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_064723) do
+ActiveRecord::Schema.define(version: 2022_01_18_104552) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,18 +70,18 @@ ActiveRecord::Schema.define(version: 2022_01_03_064723) do
   create_table "notifications", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.string "notification_of_type", null: false
-    t.integer "notification_of_id", null: false
+    t.string "notifiable_type", null: false
+    t.integer "notifiable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.index ["discarded_at"], name: "index_notifications_on_discarded_at"
-    t.index ["notification_of_type", "notification_of_id"], name: "index_notifications_on_notification_of"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notification_of"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "ordered_type", null: false
-    t.integer "ordered_id", null: false
+    t.string "orderable_type", null: false
+    t.integer "orderable_id", null: false
     t.float "total_amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -89,8 +92,33 @@ ActiveRecord::Schema.define(version: 2022_01_03_064723) do
     t.integer "user_id", null: false
     t.time "end_time"
     t.date "date"
-    t.index ["ordered_type", "ordered_id"], name: "index_orders_on_ordered"
+    t.index ["orderable_type", "orderable_id"], name: "index_orders_on_orderable"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "product_services", force: :cascade do |t|
+    t.string "name"
+    t.text "desc"
+    t.string "code"
+    t.integer "duration"
+    t.integer "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "hair_code"
+    t.string "massage_code"
+    t.string "facial_code"
+    t.string "type"
+    t.string "masg_code"
+    t.string "facl_code"
+    t.integer "user_id", null: false
+    t.time "start_time"
+    t.time "end_time"
+    t.date "date"
+    t.integer "category_id", null: false
+    t.datetime "discarded_at"
+    t.index ["category_id"], name: "index_product_services_on_category_id"
+    t.index ["discarded_at"], name: "index_product_services_on_discarded_at"
+    t.index ["user_id"], name: "index_product_services_on_user_id"
   end
 
   create_table "product_variants", force: :cascade do |t|
@@ -126,31 +154,6 @@ ActiveRecord::Schema.define(version: 2022_01_03_064723) do
   create_table "searches", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "services", force: :cascade do |t|
-    t.string "name"
-    t.text "desc"
-    t.string "code"
-    t.integer "duration"
-    t.integer "price"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "hair_code"
-    t.string "massage_code"
-    t.string "facial_code"
-    t.string "type"
-    t.string "masg_code"
-    t.string "facl_code"
-    t.integer "user_id", null: false
-    t.time "start_time"
-    t.time "end_time"
-    t.date "date"
-    t.integer "category_id", null: false
-    t.datetime "discarded_at"
-    t.index ["category_id"], name: "index_services_on_category_id"
-    t.index ["discarded_at"], name: "index_services_on_discarded_at"
-    t.index ["user_id"], name: "index_services_on_user_id"
   end
 
   create_table "specific_notifications", force: :cascade do |t|
@@ -190,12 +193,12 @@ ActiveRecord::Schema.define(version: 2022_01_03_064723) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "orders", "users"
+  add_foreign_key "product_services", "categories"
+  add_foreign_key "product_services", "users"
   add_foreign_key "product_variants", "products"
   add_foreign_key "product_variants", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users"
-  add_foreign_key "services", "categories"
-  add_foreign_key "services", "users"
   add_foreign_key "specific_notifications", "notifications"
   add_foreign_key "specific_notifications", "users"
   add_foreign_key "wishlists", "product_variants"

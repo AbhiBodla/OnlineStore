@@ -41,10 +41,10 @@ en:
       product_variant_updated: "Product Variant was successfully updated."
       product_variant_destroyed: "Product Variant was successfully destroyed."
 
-   # for services
-      service_created: "Service was successfully created."
-      service_updated: "Service was successfully updated."
-      service_destroyed: "Service was successfully destroyed." 
+   # for product_services
+      product_service_created: "Product Service was successfully created."
+      product_service_updated: "Product Service was successfully updated."
+      product_service_destroyed: "Product Service was successfully destroyed." 
 
    # for orders 
       order_created: "Order was successfully created."
@@ -73,7 +73,7 @@ en:
 
    # for orders_helper
       added_in_cart: "Added in Cart"
-      already_in_cart: "Service is already in cart"  
+      already_in_cart: "Product Service is already in cart"  
 
    # for orders_model (order.rb)
       order_title: "Order Placed"
@@ -82,7 +82,7 @@ en:
       product_title: "Product Added"
       product_content: "There is a new Product"  
 
-   # for services_model (service.rb)
-      service_title: "Service Added"
-      service_content: "There is a new Service"   
+   # for product_services_model (product_service.rb)
+      product_service_title: "Product Service Added"
+      product_service_content: "There is a new Product Service"   
        

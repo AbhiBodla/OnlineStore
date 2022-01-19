@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     collection do 
       get 'time_slot'
     end
-  end  
+  end 
+  get "admin_orders", to: "orders#adminorder" 
   resources :products do
     resources :orders, module: :products
   end
@@ -23,10 +24,10 @@ Rails.application.routes.draw do
     resources :orders, module: :product_variants
   end
   post "product_variants/soft_destroy", to: "product_variants#soft_destroy"
-  resources :services do 
-    resources :orders, module: :services
+  resources :product_services do 
+    resources :orders, module: :product_services
   end  
-  post "services/soft_destroy", to: "services#soft_destroy"
+  post "product_services/soft_destroy", to: "product_services#soft_destroy"
    post 'carts/update_qty'
    get 'carts/pay_now'
    post 'carts/update_time'

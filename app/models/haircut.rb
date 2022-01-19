@@ -1,2 +1,2 @@
-class Haircut < Service
+class Haircut < ProductService
 end

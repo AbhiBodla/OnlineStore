@@ -1,4 +1,4 @@
-class ServicePolicy < ApplicationPolicy
+class ProductServicePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -21,6 +21,10 @@ class ServicePolicy < ApplicationPolicy
   def create?
 
     @user.role == 'admin' || @user.role == 'seller'
+  end
+  
+  def soft_destroy?
+    user_is_owner_of_record? 
   end
 
   def new?

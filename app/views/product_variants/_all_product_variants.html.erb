@@ -51,6 +51,7 @@
                         
                                <td><button><%= link_to 'Show', product_variant, class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %></button>
                           &nbsp
+                          <%= current_user.role %>
                                 <button><%= link_to 'Edit', edit_product_variant_path(product_variant, pid: @product.id), class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" if signed_in? && policy(product_variant).update?  %> </button>&nbsp<br><br>
                                 
                                 <button><%= link_to 'Permanent Destroy', product_variant, class:"bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded", method: :delete, data: { confirm: 'Are you sure?' } if signed_in? && (current_user.role == "admin") %></button><br><br>

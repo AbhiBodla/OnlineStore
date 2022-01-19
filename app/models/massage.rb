@@ -1,2 +1,2 @@
-class Massage < Service
+class Massage < ProductService
 end
