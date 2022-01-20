@@ -43,8 +43,8 @@
             </tr>
           </thead>
           <tbody>
-            <% @cart.each do |cart| %>
-          <% if cart.cart == true  %>
+          <% @orders = Order.where(user_id:  current_user.id, cart: "true")%>
+            <% @orders.each do |cart| %>          
             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= cart.orderable_id %></td>
                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -52,8 +52,7 @@
               <%= cart.orderable.product.name %></td>
               <% else %>
               <%= cart.orderable.name %></td>
-              <% end %>
-              
+              <% end %>              
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
               <% if defined? cart.orderable.product.desc %>
                <%= cart.orderable.product.desc %></td>
@@ -102,12 +101,8 @@
                                     data: "time="+time+"&order_id="+order_id+"&new="+newPrice
                                 });
                             }
-                    
-                            
-
                 </script>
-               <% end %>
-             <% end %>
+               <% end %>            
           <% end %>
           </tbody>
         </table>

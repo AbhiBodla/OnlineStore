@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
     def after_sign_in_path_for(resource)
      
       if session[:addtocart]['orderable_type'] != nil 
+    
          if (session[:addtocart]['orderable_type'] == "ProductVariant")          
            ProductVariant.find(session[:addtocart]['orderable_id'])
          else

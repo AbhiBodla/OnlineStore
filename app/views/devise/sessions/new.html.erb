@@ -33,7 +33,7 @@
                                 <div>
                                   <%= f.submit "Log in", class:"shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
                                 </div>
-                                <% session[:addtocart] = {ordered_type: params[:type], ordered_id: params[:id] }%>
+                                <% session[:addtocart] = {orderable_type: params[:type], orderable_id: params[:id] }%>
                     <% end %>
                     <%= render "devise/shared/links" %>
             </div>
